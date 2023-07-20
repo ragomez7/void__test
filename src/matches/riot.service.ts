@@ -224,7 +224,7 @@ export class RiotService {
             'X-Riot-Token': this.RIOT_API_KEY,
           },
           params: {
-            count: 95,
+            count: 80,
             queue,
           },
         },
