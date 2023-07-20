@@ -1,0 +1,118 @@
+openapi: 3.0.3
+info:
+  title: Void Games API
+  description: |-
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac luctus augue. Nulla tempus dolor sed velit feugiat, tempus efficitur sem dapibus. Sed id lorem ut metus tincidunt condimentum. Phasellus imperdiet ex eu condimentum venenatis. Aenean at dignissim erat, molestie fermentum nisi. Aliquam efficitur est eu urna venenatis congue. Curabitur vel nisi pulvinar, tristique felis at, euismod ex. Vivamus non orci a metus sollicitudin tincidunt id ut enim. Aliquam tempus mauris mi, at placerat urna imperdiet sit amet.
+
+    _Vivamus faucibus magna finibus ligula pulvinar molestie. Vivamus blandit quam facilisis pellentesque cursus. Donec tincidunt diam ut dolor euismod placerat in sollicitudin odio. Proin eget molestie massa. Etiam eget eros ut neque commodo finibus._
+    
+    Some useful links:
+    - [Void.gg site](https://void.gg/)
+    - [Void.gg Twitch Channel](https://www.twitch.tv/team/voidgg)
+  termsOfService: https://void.gg/privacy-policy
+  contact:
+    email: satrgomez7@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://ec2-3-134-251-78.us-east-2.compute.amazonaws.com/
+tags:
+  - name: recent-matches
+    description: Related to recent matches.
+  - name: players
+    description: Related to players info.
+  - name: leaderboard
+    description: Related to this app's leaderboards
+paths:
+  /recent-matches/by-name/{summonerName}:
+    get:
+      tags:
+        - recent-matches
+      summary: Gets recent maches by passed summoner name (must contain region).
+      description: Gets recent maches by passed summoner name (must contain region).
+      operationId: updatePet
+      parameters:
+        - name: summonerName
+          in: path
+          description: The summoner name
+          required: true
+          schema:
+            type: string
+        - name: summonerRegion
+          in: query
+          description: The summoner's region
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Top amount of results you want to bring.
+          required: false
+          schema:
+            type: number
+        - name: offset
+          in: query
+          description: How many matches you want to skip?
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request. Verify that you provided a proper summoner region and name.
+        '403':
+          description: Check your API key.
+  /players/by-name/{summonerName}:
+    get:
+      tags:
+        - players
+      summary: Get last 100 player's matches info.
+      description: Get last 100 player's matches info.
+      parameters:
+      - name: summonerName
+        in: path
+        description: The summoner name
+        required: true
+        schema:
+          type: string
+      - name: summonerRegion
+        in: query
+        description: The summoner's region
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request. Verify that you provided a proper summoner region and name.
+        '403':
+          description: Check your API key.
+  
+  /leaderboard/{summonerName}/${summonerRegion}:
+    get:
+      tags:
+        - leaderboard
+      summary: Get custom leaderboard for previous app requests.
+      description: Get custom leaderboard for previous app requests.
+      parameters:
+      - name: summonerName
+        in: path
+        description: The summoner name
+        required: true
+        schema:
+          type: string
+      - name: summonerRegion
+        in: path
+        description: The summoner's region
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request. Verify that you provided a proper summoner region and name.
+        '403':
+          description: Check your API key.
+
