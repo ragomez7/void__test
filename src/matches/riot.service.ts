@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { UserLeaderboardService } from 'src/database/user-leaderboard.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable({})
 export class RiotService {
@@ -11,8 +12,9 @@ export class RiotService {
   constructor(
     private httpService: HttpService,
     private readonly userLeaderboardService: UserLeaderboardService,
+    private config: ConfigService
   ) {
-    this.RIOT_API_KEY = 'RGAPI-7176412a-2fba-449d-b9ae-537ae7f0ff07';
+    this.RIOT_API_KEY = this.config.get('RIOT_API_KEY');
     this.REGIONAL_ENDPOINT_URLS = {
       NA: 'https://na1.api.riotgames.com',
       BR: 'https://br1.api.riotgames.com',
