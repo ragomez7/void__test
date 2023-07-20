@@ -62,6 +62,10 @@ paths:
           description: Bad request. Verify that you provided a proper summoner region and name.
         '403':
           description: Check your API key.
+        '404':
+          description: Summoner not found. Verify that this summoner exists within the provided region.
+        '429':
+          description: Rate limit exceeded.
   /players/by-name/{summonerName}:
     get:
       tags:
@@ -88,6 +92,10 @@ paths:
           description: Bad request. Verify that you provided a proper summoner region and name.
         '403':
           description: Check your API key.
+        '404':
+          description: Summoner not found. Verify that this summoner exists within the provided region.
+        '429':
+          description: Rate limit exceeded.
   
   /leaderboard/{summonerName}/${summonerRegion}:
     get:
@@ -115,4 +123,6 @@ paths:
           description: Bad request. Verify that you provided a proper summoner region and name.
         '403':
           description: Check your API key.
+        '404':
+          description: Summoner not found. Verify that this summoner exists within the provided region.
 
