@@ -26,4 +26,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           docker pull ragomez777/void_gg_test:latest
-          docker run -d -p 80:80 ragomez777/void_gg_test:latest
+          docker stop void_gg_test_container || true
+          docker rm void_gg_test_container || true
+          docker run -d -p 80:80 --name void_gg_test_container -e RIOT_API_KEY=${{ secrets.RIOT_API_KEY }} -e DB_URI=${{ secrets.DB_URI }} ragomez777/void_gg_test:latest
